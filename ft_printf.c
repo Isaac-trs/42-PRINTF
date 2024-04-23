@@ -6,22 +6,21 @@
 /*   By: istripol <istripol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:34:22 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/23 01:47:00 by istripol         ###   ########.fr       */
+/*   Updated: 2024/04/23 04:28:59 by istripol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h" 
 
-int	flag_processor(const char *string, va_list args)	
+int	flag_processor(const char *string, va_list args)
 {
-	int cpt;
+	int	cpt;
 
-	cpt  = 0;
+	cpt = 0;
 	if (*string == 'c')
 		cpt += print_char(va_arg(args, int));
 	else if (*string == 's')
 		cpt += print_string(va_arg(args, char *));
-	
 //	else if (*string == 'p')
 //		cpt +=
 	else if (*string == 'i')
@@ -34,14 +33,13 @@ int	flag_processor(const char *string, va_list args)
 //		cpt +=
 //	else if (*string == 'X')
 //		cpt +=
-
 	return (cpt);
 }
 
 int	ft_printf(const char *string, ...)
 {
 	va_list		args;
-	int	cpt;
+	int			cpt;
 
 	cpt = 0;
 	va_start(args, string);
