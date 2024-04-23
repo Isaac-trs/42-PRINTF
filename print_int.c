@@ -6,7 +6,7 @@
 /*   By: istripol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 01:30:32 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/23 04:23:55 by istripol         ###   ########.fr       */
+/*   Updated: 2024/04/23 04:32:12 by istripol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	print_int(int n)
 {
 	int				nb;
-	unsigned int	i;
+	unsigned int	cpt;
 
 	cpt = 1;
 	nb = n;
