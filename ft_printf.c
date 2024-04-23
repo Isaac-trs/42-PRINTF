@@ -6,27 +6,27 @@
 /*   By: istripol <istripol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:34:22 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/23 04:28:59 by istripol         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:17:43 by istripol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h" 
 
-int	flag_processor(const char *string, va_list args)
+static int	flags_processor(const char *string, va_list ap)
 {
 	int	cpt;
 
 	cpt = 0;
 	if (*string == 'c')
-		cpt += print_char(va_arg(args, int));
+		cpt += print_char(va_arg(ap, int));
 	else if (*string == 's')
-		cpt += print_string(va_arg(args, char *));
+		cpt += print_string(va_arg(ap, char *));
 //	else if (*string == 'p')
 //		cpt +=
 	else if (*string == 'i')
-		cpt += print_int(va_arg(args, int));
+		cpt += print_int(va_arg(ap, int));
 	else if (*string == 'd')
-		cpt += print_int(va_arg(args, int));
+		cpt += print_int(va_arg(ap, int));
 //	else if (*string == 'u')
 //		cpt +=
 //	else if (*string == 'x')
@@ -38,11 +38,11 @@ int	flag_processor(const char *string, va_list args)
 
 int	ft_printf(const char *string, ...)
 {
-	va_list		args;
+	va_list		ap;
 	int			cpt;
 
 	cpt = 0;
-	va_start(args, string);
+	va_start(ap, string);
 	while (*string)
 	{
 		if (*string == '%')
@@ -51,12 +51,12 @@ int	ft_printf(const char *string, ...)
 			if (*string == '%')
 				cpt += print_char('%');
 			else if (ft_strchr("cspiduxX", *string))
-				cpt += flag_processor(string, args);
+				cpt += flags_processor(string, ap);
 		}
 		else
 			cpt = cpt + print_char(*string);
 		string++;
 	}
-	va_end(args);
+	va_end(ap);
 	return (cpt);
 }
