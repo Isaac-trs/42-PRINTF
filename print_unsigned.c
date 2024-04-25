@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: istripol <istripol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 08:22:12 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/23 08:23:16 by istripol         ###   ########.fr       */
+/*   Created: 2024/04/25 00:20:35 by istripol          #+#    #+#             */
+/*   Updated: 2024/04/25 01:16:51 by istripol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MIN_INT
-# define MIN_INT -2147483648
-#endif
+#include "printf.h"
 
-#ifndef PRINTF_H
-# define PRINTF_H
-# include "./Libft/libft.h"
-# include <stdarg.h>
+static int	ui_len(unsigned int n)
+{
+	int	cpt;
 
+	cpt = 0;
+	while (n > 9)
+	{
+		n /= 10;
+		cpt++;
+	}
+	return (cpt);
+}
 
-int		ft_printf(const char *string, ...);
-int		print_char(char c);
-int		print_string(char *str);
-int		print_int(int n);
-#endif
+int	print_unsigned(unsigned int n)
+{
+	int	cpt;
+
+	cpt = ui_len(n);
+	if (n == MAX_UINT)
+	{
+		ft_putstr_fd("4294967295", 1);
+		return (10);
+	}
+	if (n > 9)
+	{
+		cpt++;
+		print_unsigned(n / 10);
+	}
+	ft_putchar_fd(n % 10 + '0', 1);
+	return (cpt);
+}

@@ -1,34 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_int.c                                        :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: istripol <istripol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 01:30:32 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/25 00:32:10 by istripol         ###   ########.fr       */
+/*   Created: 2024/04/24 05:15:52 by istripol          #+#    #+#             */
+/*   Updated: 2024/04/25 02:09:26 by istripol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	print_int(int n)
+static int	hex_len(unsigned int n)
 {
-	long	nb;
-	int		cpt;
+	int	cpt;
+	unsigned int m;
 
-	cpt = 1;
-	nb = n;
-	if (n < 0 && n > MIN_INT)
+	cpt = 0;
+	m = n;
+	while (m > 0)
 	{
-		n = -nb;
 		cpt++;
+		m /= 16;
 	}
-	while (nb > 9)
-	{
-		nb /= 10;
-		cpt++;
-	}
-	ft_putnbr_fd(n, 1);
 	return (cpt);
+} 
+
+int	print_hex(unsigned int n, char type)
+{
+	unsigned int	x;
+	const char *base = HEX;
+	
+	x = n;
+	if (x < 16)
+	{	
+		if (type == 'X')	
+			ft_putchar_fd(ft_toupper(base[x % 16]), 1);
+		else
+			ft_putchar_fd(base[x % 16], 1);
+	}
+	else
+	{
+		print_hex(x / 16, type);
+		print_hex(x % 16, type);
+	}
+	return (hex_len(n));
 }
