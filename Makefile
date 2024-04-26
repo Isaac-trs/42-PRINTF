@@ -6,7 +6,7 @@
 #    By: istripol <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 15:13:15 by istripol          #+#    #+#              #
-#    Updated: 2024/04/25 02:09:39 by istripol         ###   ########.fr        #
+#    Updated: 2024/04/26 18:28:32 by istripol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,16 @@ NAME = libftprintf.a
 LIBFTNAME = libft.a
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-LIBFTDIR = ./Libft
+LIBFTDIR = ./libft
 
 SRCS = 	ft_printf.c \
-	print_string.c \
-	print_char.c \
-	print_int.c \
-	print_hex.c \
-	print_unsigned.c \
+	ft_print_string.c \
+	ft_print_char.c \
+	ft_print_int.c \
+	ft_print_hex.c \
+	ft_print_unsigned.c \
+	ft_print_ptr.c \
+	ft_hex_len.c \
 
 OBJS = $(SRCS:.c=.o)
 
