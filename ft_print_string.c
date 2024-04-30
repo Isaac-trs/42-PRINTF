@@ -14,14 +14,10 @@
 
 int	ft_print_string(char *str)
 {
-	int	cpt;
-
 	if (!str)
 	{
 		ft_putstr_fd("(null)", 1);
 		return (6);
 	}
-	cpt = (int)ft_strlen(str);
-	ft_putstr_fd(str, 1);
-	return (cpt);
+	return (ft_putstr_fd(str, 1));
 }

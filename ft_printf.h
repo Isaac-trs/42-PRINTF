@@ -15,25 +15,14 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-# ifndef MIN_INT
-#  define MIN_INT -2147483648
-# endif
-
-# ifndef MAX_UINT
-#  define MAX_UINT 4294967295 
-# endif
-
 # ifndef HEX
-#  define HEX "0123456789abcdef"
+#  define HEX "0123456789abcdef0123456789ABCDEF"
 # endif
 
 int		ft_printf(const char *string, ...);
 int		ft_print_char(char c);
 int		ft_print_string(char *str);
-int		ft_print_int(int n);
-int		ft_print_hex(unsigned long n, char type);
-int		ft_print_unsigned(unsigned int n);
 int		ft_print_ptr(unsigned long ptr);
-int		ft_hex_len(unsigned long n);
+int		ft_print_base(unsigned long n, int base, unsigned upper);
 
 #endif

@@ -12,29 +12,30 @@
 
 #include "ft_printf.h" 
 
-static int	flags_processor(const char *string, va_list ap)
+static int	flags_processor(const char id, va_list ap)
 {
-	int	cpt;
+	int tmp;
 
-	cpt = 0;
-	if (*string == '%')
-		cpt += ft_print_char(*string);
-	else if (*string == 'c')
-		cpt += ft_print_char(va_arg(ap, int));
-	else if (*string == 's')
-		cpt += ft_print_string(va_arg(ap, char *));
-	else if (*string == 'u')
-		cpt += ft_print_unsigned(va_arg(ap, unsigned int));
-	else if (*string == 'd' || *string == 'i')
-		cpt += ft_print_int(va_arg(ap, int));
-	else if (*string == 'p' || *string == 'x' || *string == 'X')
+	if (id == '%')
+		return (ft_print_char(id));
+	else if (id == 'c')
+		return (ft_print_char(va_arg(ap, int)));
+	else if (id == 's')
+		return (ft_print_string(va_arg(ap, char *)));
+	else if (id == 'u')
+		return (ft_print_base(va_arg(ap, unsigned int), 10, 0));
+	else if (id == 'd' || id == 'i')
 	{
-		if (*string == 'p')
-			cpt += ft_print_ptr((unsigned long)va_arg(ap, void *));
-		else
-			cpt += ft_print_hex(va_arg(ap, unsigned int), *string);
+		tmp = va_arg(ap, int);
+		if (tmp < 0)
+			return (ft_putchar_fd('-', 1) + ft_print_base((unsigned)tmp * -1, 10, 0));
+		return (ft_print_base((unsigned)tmp, 10, 0));
 	}
-	return (cpt);
+	else if (id == 'x' || id == 'X')
+		return (ft_print_base(va_arg(ap, unsigned int), 16, id == 'X'));
+	else if (id == 'p')
+		return (ft_print_ptr((unsigned long)va_arg(ap, void *)));
+	return (ft_print_char('%'));
 }
 
 int	ft_printf(const char *string, ...)
@@ -49,11 +50,7 @@ int	ft_printf(const char *string, ...)
 	while (*string)
 	{
 		if (*string == '%')
-		{
-			string++;
-			if (ft_strchr("%scpiduxX", *string))
-				cpt += flags_processor(string, ap);
-		}
+			cpt += flags_processor(*++string, ap);
 		else
 			cpt += ft_print_char(*string);
 		string++;
