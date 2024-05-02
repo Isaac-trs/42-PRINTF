@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: istripol <istripol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rocket <rocket@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:34:22 by istripol          #+#    #+#             */
-/*   Updated: 2024/04/26 18:24:42 by istripol         ###   ########.fr       */
+/*   Updated: 2024/05/02 06:07:44 by rocket           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	flags_processor(const char id, va_list ap)
 {
-	int tmp;
+	int	tmp;
 
 	if (id == '%')
 		return (ft_print_char(id));
@@ -28,7 +28,10 @@ static int	flags_processor(const char id, va_list ap)
 	{
 		tmp = va_arg(ap, int);
 		if (tmp < 0)
-			return (ft_putchar_fd('-', 1) + ft_print_base((unsigned)tmp * -1, 10, 0));
+		 {
+			ft_putchar_fd('-', 1);
+			return (1 + ft_print_base((unsigned)tmp * -1, 10, 0));
+		 }
 		return (ft_print_base((unsigned)tmp, 10, 0));
 	}
 	else if (id == 'x' || id == 'X')

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_base.c                                    :+:      :+:    :+:   */
+/*   ft_print_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocket <rocket@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 05:15:52 by istripol          #+#    #+#             */
-/*   Updated: 2024/05/02 06:06:43 by rocket           ###   ########.fr       */
+/*   Created: 2024/05/02 05:25:52 by istripol          #+#    #+#             */
+/*   Updated: 2024/05/02 05:27:11 by rocket           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_base(unsigned long n, int base, unsigned int upper)
+int	ft_print_string(char *str)
 {
-	static int	cpt;
-
-	cpt = 0;
-	if (n >= (unsigned)base)
-		ft_print_base(n / base, base, upper);
-	cpt += ft_putchar_fd(HEX[n % base + (upper * base)], 1);
-	return (cpt);
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	return (ft_putstr_fd(str, 1));
 }
